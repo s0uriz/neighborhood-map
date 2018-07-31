@@ -1,11 +1,17 @@
-import React, { Component } from 'react';
-import './App.css';
-import MapContainer from './components/Map'
+import React, { Component } from "react";
+import "./App.css";
+import Aside from "./components/Aside";
+import MapContainer from "./components/Map";
 
 class App extends Component {
   render() {
     return (
-      <MapContainer />
+      <div className="wrapper">
+        <Aside />
+        <main>
+          <MapContainer />
+        </main>
+      </div>
     );
   }
 }

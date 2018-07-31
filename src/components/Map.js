@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import Header from "./Header";
 
 //note: code formatted for ES6 here
 export class MapContainer extends Component {
@@ -31,27 +32,30 @@ export class MapContainer extends Component {
       height: "100%"
     };
     return (
-      <Map
-        google={this.props.google}
-        onClick={this.onMapClicked}
-        style={style}
-        initialCenter={{
-          lat: 40.854885,
-          lng: -88.081807
-        }}
-        zoom={15}
-      >
-        <Marker onClick={this.onMarkerClick} name={"Current location"} />
-
-        <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
+      <div className="main-block">
+        <Header />
+        <Map
+          google={this.props.google}
+          onClick={this.onMapClicked}
+          style={style}
+          initialCenter={{
+            lat: 40.854885,
+            lng: -88.081807
+          }}
+          zoom={15}
         >
-          <div>
-            <h1>{this.state.selectedPlace.name}</h1>
-          </div>
-        </InfoWindow>
-      </Map>
+          <Marker onClick={this.onMarkerClick} name={"Current location"} />
+
+          <InfoWindow
+            marker={this.state.activeMarker}
+            visible={this.state.showingInfoWindow}
+          >
+            <div>
+              <h1>{this.state.selectedPlace.name}</h1>
+            </div>
+          </InfoWindow>
+        </Map>
+      </div>
     );
   }
 }

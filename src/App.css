@@ -3,22 +3,23 @@
   flex-direction: row;
   flex-wrap: wrap;
   height: 100vh;
+  align-items: flex-start;
 }
 .side-bar{
   background: #000;
   color: #fff;
   width: 20%;
+  height: 100vh;
 }
 main {
-  width: 80%;
   position: relative;
-}
-.main-block{
- 
+  width: 80%;
+  height: 100vh;
 }
 header{
+  width: 100%;
   background: #000;
-  padding: 10px 0 10px 20px;
+  padding: 10px 0 10px 21%;
 }
 .hamburger-menu{
   cursor: pointer;
@@ -28,4 +29,13 @@ header{
   height: 2px;
   background-color: white;
   margin: 4px 0;
+}
+
+@media all and (min-width: 600px) {
+
+}
+
+
+@media all and (min-width: 800px) {
+
 }

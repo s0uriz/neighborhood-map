@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import SearchBox from './SearchBox'
 
 class Aside extends Component {
   render() {
     return (
-        <aside className="side-bar">fff</aside>
+        <aside className="side-bar">
+          <SearchBox />
+        </aside>
     )
   }
 }

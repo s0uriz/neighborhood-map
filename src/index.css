@@ -38,9 +38,9 @@ header {
 }
 .hamburger-menu div {
   width: 20px;
-  height: 2px;
+  height: 3px;
   background-color: white;
-  margin: 4px 0;
+  margin-bottom: 3px;
 }
 
 .locations-list {
@@ -52,4 +52,33 @@ header {
   margin: 0;
   padding: 10px 20px;
   cursor: pointer;
+}
+
+@media all and (min-width: 320px) and (max-width: 767px){ 
+  header {
+    padding-left: 20px;
+  }
+  .side-bar {
+    width: 100%;
+    height: auto;
+    padding: 20px 0;
+  }
+  main {
+    width: 100%;
+  }
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px){ 
+  header {
+    height: 4%;
+    padding-left: 31%;
+  }
+  .side-bar {
+    width: 30%;
+    height: 96%;
+  }
+  main {
+    width: 70%;
+    height: 96%;
+  }
 }

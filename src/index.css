@@ -72,17 +72,17 @@ header {
   }
 }
 
-@media all and (min-width: 768px) and (max-width: 1024px){ 
+@media all and (min-width: 768px){ 
   header {
     height: 4%;
-    padding-left: 31%;
+    padding-left: 21%;
   }
   .side-bar {
-    width: 30%;
+    width: 20%;
     height: 96%;
   }
   main {
-    width: 70%;
+    width: 80%;
     height: 96%;
   }
   .padding-20 {

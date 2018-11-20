@@ -1,5 +1,6 @@
 import React from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import Header from "./Header";
 
 const locationsList = [
   {
@@ -89,13 +90,7 @@ class App extends React.Component {
     }
     return (
       <div className="wrapper">
-        <header className={!isHidden ? 'padding-20' : ''}>
-          <div className="hamburger-menu" onClick={this.toggleSidebar}>
-            <div />
-            <div />
-            <div />
-          </div>
-        </header>
+        <Header toggleSidebar={this.toggleSidebar} isHidden={this.state.isHidden} />
         {isHidden ? (
           <aside className="side-bar">
             <input

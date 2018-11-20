@@ -40,7 +40,8 @@ class App extends React.Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
-      locations: locationsList
+      locations: locationsList,
+      isHidden: true
     };
   }
 
@@ -52,7 +53,7 @@ class App extends React.Component {
     });
   };
 
-  onMapClicked = props => {
+  onMapClicked = () => {
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
@@ -67,11 +68,18 @@ class App extends React.Component {
     });
   };
 
+  toggleSidebar = () => {
+    this.setState({
+      isHidden: !this.state.isHidden
+    });
+  }
+
   render() {
     const style = {
       width: "100%",
       height: "100%"
     };
+    const { isHidden} = this.state;
     if (this.state.value) {
       this.state.locations = this.state.locations.filter(location =>
         location.name.toLowerCase().includes(this.state.value.toLowerCase())
@@ -81,28 +89,30 @@ class App extends React.Component {
     }
     return (
       <div className="wrapper">
-        <header>
-          <div className="hamburger-menu">
+        <header className={!isHidden ? 'padding-20' : ''}>
+          <div className="hamburger-menu" onClick={this.toggleSidebar}>
             <div />
             <div />
             <div />
           </div>
         </header>
-        <aside className="side-bar">
-          <input
-            className="search"
-            type="text"
-            id="location"
-            placeholder="Location"
-            onChange={this.handleLocationSearch}
-          />
-          <ul className="locations-list">
-            {this.state.locations.map(location => {
-              return <li key={location.name.toLowerCase()}>{location.name}</li>;
-            })}
-          </ul>
-        </aside>
-        <main>
+        {isHidden ? (
+          <aside className="side-bar">
+            <input
+              className="search"
+              type="text"
+              id="location"
+              placeholder="Location"
+              onChange={this.handleLocationSearch}
+            />
+            <ul className="locations-list">
+              {this.state.locations.map(location => {
+                return <li key={location.name.toLowerCase()}>{location.name}</li>;
+              })}
+            </ul>
+          </aside>
+        ) : null}
+        <main className={!isHidden ? 'width-100' : ''}>
           <Map
             google={this.props.google}
             onClick={this.onMapClicked}

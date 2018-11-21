@@ -77,15 +77,22 @@ class App extends React.Component {
     });
   };
 
+  onListItemClick = () => {
+    console.log("hey");
+  };
+
   render() {
     const { isHidden } = this.state;
+    let locations = this.state.locations;
+
     if (this.state.value) {
-      this.state.locations = this.state.locations.filter(location =>
+      locations = locations.filter(location =>
         location.name.toLowerCase().includes(this.state.value.toLowerCase())
       );
     } else {
-      this.state.locations = locationsList;
+      locations = this.state.locations;
     }
+
     return (
       <div className="wrapper">
         <Header
@@ -94,13 +101,14 @@ class App extends React.Component {
         />
         {isHidden ? (
           <Aside
-            locations={this.state.locations}
+            locations={locations}
             handleLocationSearch={this.handleLocationSearch}
+            onListItemClick={this.onListItemClick}
           />
         ) : null}
         <main className={!isHidden ? "width-100" : ""}>
           <MapContainer
-            locations={this.state.locations}
+            locations={locations}
             activeMarker={this.state.activeMarker}
             showingInfoWindow={this.state.showingInfoWindow}
             selectedPlace={this.state.selectedPlace}

@@ -13,7 +13,14 @@ class Aside extends React.Component {
         />
         <ul className="locations-list">
           {this.props.locations.map(location => {
-            return <li key={location.name.toLowerCase()}>{location.name}</li>;
+            return (
+              <li
+                onClick={this.props.onListItemClick}
+                key={location.name.toLowerCase()}
+              >
+                {location.name}
+              </li>
+            );
           })}
         </ul>
       </aside>

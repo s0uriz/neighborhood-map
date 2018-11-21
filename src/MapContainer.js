@@ -4,9 +4,6 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 class MapContainer extends React.Component {
   render() {
     const style = { width: "100%", height: "100%" };
-    // if (this.state.loading) {
-    //   return <p>Loading...</p>;
-    // }
     return (
       <Map
         google={this.props.google}

@@ -1,6 +1,7 @@
 import React from "react";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import Header from "./Header";
+import Aside from "./Aside";
+import MapContainer from "./MapContainer";
 
 const locationsList = [
   {
@@ -69,18 +70,15 @@ class App extends React.Component {
     });
   };
 
-  toggleSidebar = () => {
+  toggleSidebar = event => {
     this.setState({
-      isHidden: !this.state.isHidden
+      isHidden: !this.state.isHidden,
+      value: event.target.value
     });
-  }
+  };
 
   render() {
-    const style = {
-      width: "100%",
-      height: "100%"
-    };
-    const { isHidden} = this.state;
+    const { isHidden } = this.state;
     if (this.state.value) {
       this.state.locations = this.state.locations.filter(location =>
         location.name.toLowerCase().includes(this.state.value.toLowerCase())
@@ -90,61 +88,29 @@ class App extends React.Component {
     }
     return (
       <div className="wrapper">
-        <Header toggleSidebar={this.toggleSidebar} isHidden={this.state.isHidden} />
+        <Header
+          toggleSidebar={this.toggleSidebar}
+          isHidden={this.state.isHidden}
+        />
         {isHidden ? (
-          <aside className="side-bar">
-            <input
-              className="search"
-              type="text"
-              id="location"
-              placeholder="Location"
-              onChange={this.handleLocationSearch}
-            />
-            <ul className="locations-list">
-              {this.state.locations.map(location => {
-                return <li key={location.name.toLowerCase()}>{location.name}</li>;
-              })}
-            </ul>
-          </aside>
+          <Aside
+            locations={this.state.locations}
+            handleLocationSearch={this.handleLocationSearch}
+          />
         ) : null}
-        <main className={!isHidden ? 'width-100' : ''}>
-          <Map
-            google={this.props.google}
-            onClick={this.onMapClicked}
-            style={style}
-            initialCenter={{
-              lat: 7.8922116,
-              lng: 98.2979299
-            }}
-            zoom={16}
-          >
-            {this.state.locations.map(place => {
-              return (
-                <Marker
-                  onClick={this.onMarkerClick}
-                  key={place.name.toString()}
-                  title={place.name}
-                  name={place.name}
-                  position={place.location}
-                // animation={this.props.google.maps.Animation.BOUNCE}
-                />
-              );
-            })}
-            <InfoWindow
-              marker={this.state.activeMarker}
-              visible={this.state.showingInfoWindow}
-            >
-              <div>
-                <h2>{this.state.selectedPlace.name}</h2>
-              </div>
-            </InfoWindow>
-          </Map>
+        <main className={!isHidden ? "width-100" : ""}>
+          <MapContainer
+            locations={this.state.locations}
+            activeMarker={this.state.activeMarker}
+            showingInfoWindow={this.state.showingInfoWindow}
+            selectedPlace={this.state.selectedPlace}
+            onMarkerClick={this.onMarkerClick}
+            onMapClicked={this.onMapClicked}
+          />
         </main>
       </div>
     );
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: "AIzaSyBBJzSPHKD0QIhvL89QsoK_BX7SqPZTYTI"
-})(App);
+export default App;

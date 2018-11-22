@@ -77,8 +77,8 @@ class App extends React.Component {
     });
   };
 
-  onListItemClick = () => {
-    console.log("hey");
+  onListItemClick = locationName => {
+    document.querySelector(`[title="${locationName}"]`).click();
   };
 
   render() {

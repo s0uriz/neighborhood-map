@@ -15,7 +15,7 @@ class Aside extends React.Component {
           {this.props.locations.map(location => {
             return (
               <li
-                onClick={this.props.onListItemClick}
+                onClick={() => this.props.onListItemClick(location.name)}
                 key={location.name.toLowerCase()}
               >
                 {location.name}

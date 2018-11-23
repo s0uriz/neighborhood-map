@@ -5,24 +5,34 @@ class Aside extends React.Component {
     return (
       <aside className="side-bar">
         <input
+          aria-label="Filter places"
+          tabIndex="0"
+          role="search"
           className="search"
           type="text"
           id="location"
           placeholder="Location"
           onChange={this.props.handleLocationSearch}
         />
-        <ul className="locations-list">
-          {this.props.locations.map(location => {
-            return (
-              <li
-                onClick={() => this.props.onListItemClick(location.name)}
-                key={location.name.toLowerCase()}
-              >
-                {location.name}
-              </li>
-            );
-          })}
-        </ul>
+        <nav>
+          <ul className="locations-list">
+            {this.props.locations.map(location => {
+              return (
+                <li
+                  role="button"
+                  tabIndex="0"
+                  onClick={() => this.props.onListItemClick(location.name)}
+                  onKeyPressCapture={() =>
+                    this.props.onListItemClick(location.name)
+                  }
+                  key={location.name.toLowerCase()}
+                >
+                  {location.name}
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
       </aside>
     );
   }

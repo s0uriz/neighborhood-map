@@ -20,16 +20,17 @@ class MapContainer extends React.Component {
               title={place.name}
               name={place.name}
               position={place.location}
-              // animation={this.props.google.maps.Animation.BOUNCE}
+              tabIndex="0"
             />
           );
+          // animation={this.props.google.maps.Animation.BOUNCE}
         })}
         <InfoWindow
           marker={this.props.activeMarker}
           visible={this.props.showingInfoWindow}
         >
-          <div>
-            <h2>{this.props.selectedPlace.name}</h2>
+          <div aria-label={`InfoWindow on ${this.props.activeMarker.title}`}>
+            <h2 tabIndex="0">{this.props.selectedPlace.name}</h2>
           </div>
         </InfoWindow>
       </Map>
@@ -38,5 +39,5 @@ class MapContainer extends React.Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyBBJzSPHKD0QIhvL89QsoK_BX7SqPZTYTI"
+  apiKey: ""
 })(MapContainer);

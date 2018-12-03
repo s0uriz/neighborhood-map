@@ -9,8 +9,8 @@ class MapContainer extends React.Component {
         google={this.props.google}
         onClick={this.onMapClicked}
         style={style}
-        initialCenter={{ lat: 7.8922116, lng: 98.2979299 }}
-        zoom={16}
+        initialCenter={{ lat: 7.8968216, lng: 98.2998142 }}
+        zoom={15}
       >
         {this.props.locations.map(place => {
           return (
@@ -19,6 +19,7 @@ class MapContainer extends React.Component {
               key={place.name.toString()}
               title={place.name}
               name={place.name}
+              photos={place.photos}
               position={place.location}
               tabIndex="0"
             />
@@ -29,8 +30,13 @@ class MapContainer extends React.Component {
           marker={this.props.activeMarker}
           visible={this.props.showingInfoWindow}
         >
-          <div aria-label={`InfoWindow on ${this.props.activeMarker.title}`}>
+          <div aria-label="placeinfo">
             <h2 tabIndex="0">{this.props.selectedPlace.name}</h2>
+            <img
+              className="place-img"
+              src={this.props.selectedPlace.photos}
+              alt={this.props.selectedPlace.name}
+            />
           </div>
         </InfoWindow>
       </Map>
@@ -39,5 +45,5 @@ class MapContainer extends React.Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: ""
+  apiKey: process.env.REACT_APP_GOOGLE_API
 })(MapContainer);

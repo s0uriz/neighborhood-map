@@ -92,7 +92,7 @@ class App extends React.Component {
   };
 
   getDetails = id => {
-    const endPoint = "https://api.foursquare.com/v2/venues/" + id + "/photos/?";
+    const endPoint = "https://api.foursquare.com/v2/venues/" + id + "?";
     const params = {
       client_id: process.env.REACT_APP_CLIENT_ID,
       client_secret: process.env.REACT_APP_CLIENT_SECRET,

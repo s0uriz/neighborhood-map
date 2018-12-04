@@ -120,26 +120,27 @@ class App extends React.Component {
 
     return (
       <div className="wrapper">
-        <Header
-          toggleSidebar={this.toggleSidebar}
+        <Aside
+          locations={locations}
+          handleLocationSearch={this.handleLocationSearch}
+          onListItemClick={this.onListItemClick}
           isHidden={this.state.isHidden}
         />
-        {isHidden ? (
-          <Aside
-            locations={locations}
-            handleLocationSearch={this.handleLocationSearch}
-            onListItemClick={this.onListItemClick}
+        <main className={!this.state.isHidden ? "main" : "main main-full"}>
+          <Header
+            toggleSidebar={this.toggleSidebar}
+            isHidden={this.state.isHidden}
           />
-        ) : null}
-        <main className={!isHidden ? "width-100" : ""}>
-          <MapContainer
-            locations={locations}
-            activeMarker={this.state.activeMarker}
-            showingInfoWindow={this.state.showingInfoWindow}
-            selectedPlace={this.state.selectedPlace}
-            onMarkerClick={this.onMarkerClick}
-            onMapClicked={this.onMapClicked}
-          />
+          <div className="map-container">
+            <MapContainer
+              locations={locations}
+              activeMarker={this.state.activeMarker}
+              showingInfoWindow={this.state.showingInfoWindow}
+              selectedPlace={this.state.selectedPlace}
+              onMarkerClick={this.onMarkerClick}
+              onMapClicked={this.onMapClicked}
+            />
+          </div>
         </main>
       </div>
     );

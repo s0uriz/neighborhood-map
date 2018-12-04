@@ -3,7 +3,11 @@ import React from "react";
 class Aside extends React.Component {
   render() {
     return (
-      <aside className="side-bar">
+      <aside
+        className={
+          !this.props.isHidden ? "side-bar" : "side-bar side-bar--show"
+        }
+      >
         <input
           aria-label="Filter places"
           tabIndex="0"

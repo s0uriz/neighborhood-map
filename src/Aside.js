@@ -25,7 +25,7 @@ class Aside extends React.Component {
                   onKeyPressCapture={() =>
                     this.props.onListItemClick(location.name)
                   }
-                  key={location.name.toLowerCase()}
+                  key={location.id}
                 >
                   {location.name}
                 </li>

@@ -16,7 +16,7 @@ class MapContainer extends React.Component {
           return (
             <Marker
               onClick={this.props.onMarkerClick}
-              key={place.name.toString()}
+              key={place.id}
               title={place.name}
               name={place.name}
               photos={place.photos}

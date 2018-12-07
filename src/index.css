@@ -44,6 +44,8 @@ body {
 }
 .search {
   margin: 50px 0 0 20px;
+  width: 260px;
+  padding: 3px;
 }
 .main {
   position: relative;
@@ -130,7 +132,24 @@ header {
   margin: 0;
   padding: 10px 20px;
   cursor: pointer;
+  outline: none;
+}
+.place-info {
+  max-width: 250px;
 }
 .gm-style .place-img {
-  max-width: 100px;
+  max-width: 100%;
+  margin: 5px;
+}
+.place-text {
+  display: block;
+  font-size: 14px;
+}
+.heading {
+  color: #fff;
+  top: 8px;
+  position: absolute;
+  right: 20px;
+  font-size: 20px;
+  font-weight: bold;
 }

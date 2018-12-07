@@ -52,14 +52,47 @@ class App extends React.Component {
     document.querySelector(`[title="${locationName}"]`).click();
   };
 
+  //getting locations
   componentDidMount() {
     this.getLocations();
   }
 
+  //getting photos for locations
   componentDidUpdate() {
     let locations = this.state.locations;
     locations.map(location => {
-      this.getDetails(location.id);
+      let tag = location.name;
+      fetch(
+        "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" +
+          process.env.REACT_APP_FLICKR_KEY +
+          "&tags=" +
+          tag +
+          "&per_page=2&page=1&format=json&nojsoncallback=1"
+      )
+        .then(res => res.json())
+        .then(data => {
+          let photo = data.photos.photo.map(pic => {
+            let src =
+              "http://farm" +
+              pic.farm +
+              ".staticflickr.com/" +
+              pic.server +
+              "/" +
+              pic.id +
+              "_" +
+              pic.secret +
+              ".jpg";
+            return src;
+          });
+          if (photo.length > 0) {
+            location["photos"] = photo;
+          } else {
+            location["photos"] = [
+              "https://artelectronics.ru/default_images/main_image/base/missing.jpg"
+            ];
+          }
+        });
+      return location;
     });
   }
 
@@ -70,8 +103,9 @@ class App extends React.Component {
       client_secret: process.env.REACT_APP_CLIENT_SECRET,
       v: "20181203",
       ll: "7.8968216,98.2998142",
-      query: "seafood",
-      radius: 1000
+      query: "hotel",
+      radius: 1000,
+      limit: 20
     };
     axios
       .get(endPoint + new URLSearchParams(params))
@@ -91,23 +125,7 @@ class App extends React.Component {
       .catch(err => console.log(err));
   };
 
-  getDetails = id => {
-    const endPoint = "https://api.foursquare.com/v2/venues/" + id + "?";
-    const params = {
-      client_id: process.env.REACT_APP_CLIENT_ID,
-      client_secret: process.env.REACT_APP_CLIENT_SECRET,
-      v: "20181203"
-    };
-    axios
-      .get(endPoint + new URLSearchParams(params))
-      .then(res => {
-        console.log(res.data.response.venue);
-      })
-      .catch(err => console.log(err.response));
-  };
-
   render() {
-    const { isHidden } = this.state;
     let locations = this.state.locations;
 
     if (this.state.value) {
@@ -126,7 +144,7 @@ class App extends React.Component {
           onListItemClick={this.onListItemClick}
           isHidden={this.state.isHidden}
         />
-        <main className={!this.state.isHidden ? "main" : "main main-full"}>
+        <main className="main">
           <Header
             toggleSidebar={this.toggleSidebar}
             isHidden={this.state.isHidden}

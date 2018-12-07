@@ -4,9 +4,7 @@ class Aside extends React.Component {
   render() {
     return (
       <aside
-        className={
-          !this.props.isHidden ? "side-bar" : "side-bar side-bar--show"
-        }
+        className={this.props.isHidden ? "side-bar" : "side-bar side-bar--show"}
       >
         <input
           aria-label="Filter places"

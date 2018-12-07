@@ -6,7 +6,7 @@ class Header extends React.Component {
       <header>
         <div
           className={
-            !this.props.isHidden ? "hamburger-icon " : "hamburger-icon active"
+            this.props.isHidden ? "hamburger-icon " : "hamburger-icon active"
           }
           role="button"
           onClick={this.props.toggleSidebar}
@@ -14,6 +14,7 @@ class Header extends React.Component {
         >
           <div className="hamburger" />
         </div>
+        <span className="heading">Hotels, Patong</span>
       </header>
     );
   }

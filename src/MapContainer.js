@@ -20,23 +20,29 @@ class MapContainer extends React.Component {
               title={place.name}
               name={place.name}
               photos={place.photos}
+              likes={place.likes}
+              price={place.price}
               position={place.location}
               tabIndex="0"
             />
           );
-          // animation={this.props.google.maps.Animation.BOUNCE}
         })}
         <InfoWindow
           marker={this.props.activeMarker}
           visible={this.props.showingInfoWindow}
         >
-          <div aria-label="placeinfo">
+          <div className="place-info" aria-label="placeinfo">
             <h2 tabIndex="0">{this.props.selectedPlace.name}</h2>
-            <img
-              className="place-img"
-              src={this.props.selectedPlace.photos}
-              alt={this.props.selectedPlace.name}
-            />
+            {this.props.selectedPlace.photos
+              ? this.props.selectedPlace.photos.map(photo => (
+                  <img
+                    key={photo}
+                    className="place-img"
+                    src={photo}
+                    alt={this.props.selectedPlace.name}
+                  />
+                ))
+              : null}
           </div>
         </InfoWindow>
       </Map>

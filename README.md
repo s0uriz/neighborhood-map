@@ -5,6 +5,8 @@ It is a single page app uses React Google maps, foursquare API and flickr API to
 PROJECT SPECIFICATION:
 [Neighborhood Map project rubric](https://review.udacity.com/#!/rubrics/1351/view).
 
+![](map-gif.gif)
+
 ### Built with:
 
 - [Create React App](https://github.com/facebookincubator/create-react-app).

@@ -7,7 +7,7 @@ class MapContainer extends React.Component {
     return (
       <Map
         google={this.props.google}
-        onClick={this.onMapClicked}
+        onClick={this.props.onMapClicked}
         style={style}
         initialCenter={this.props.locationCenter}
         zoom={13}
@@ -28,6 +28,7 @@ class MapContainer extends React.Component {
         <InfoWindow
           marker={this.props.activeMarker}
           visible={this.props.showingInfoWindow}
+          onClose={this.props.onMapClicked}
         >
           {this.props.error ? (
             <div className="place-info" aria-label="placeinfo">

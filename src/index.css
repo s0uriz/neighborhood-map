@@ -73,6 +73,7 @@ header {
   position: relative;
   border-radius: 50%;
   cursor: pointer;
+  outline: none;
 }
 .hamburger {
   width: 50%;

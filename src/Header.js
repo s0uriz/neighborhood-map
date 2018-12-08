@@ -9,12 +9,15 @@ class Header extends React.Component {
             this.props.isHidden ? "hamburger-icon " : "hamburger-icon active"
           }
           role="button"
+          aria-label="button"
           onClick={this.props.toggleSidebar}
           onKeyPressCapture={this.props.toggleSidebar}
         >
           <div className="hamburger" />
         </div>
-        <span className="heading">Hotels, Patong</span>
+        <span className="heading" aria-label="hotels-patong">
+          Museums, NY
+        </span>
       </header>
     );
   }

@@ -10,11 +10,14 @@ class App extends React.Component {
     super(props);
 
     this.state = {
+      locationCenter: { lat: 40.747664, lng: -74.0107375 },
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
       locations: [],
-      isHidden: true
+      isHidden: true,
+      info: "",
+      error: false
     };
   }
 
@@ -62,16 +65,17 @@ class App extends React.Component {
     let locations = this.state.locations;
     locations.map(location => {
       let tag = location.name;
-      fetch(
-        "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" +
-          process.env.REACT_APP_FLICKR_KEY +
-          "&tags=" +
-          tag +
-          "&per_page=2&page=1&format=json&nojsoncallback=1"
-      )
-        .then(res => res.json())
+      axios
+        .get(
+          "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" +
+            process.env.REACT_APP_FLICKR_KEY +
+            "&tags=" +
+            tag +
+            "&per_page=2&page=1&format=json&nojsoncallback=1"
+        )
         .then(data => {
-          let photo = data.photos.photo.map(pic => {
+          //console.log(data.data.photos.photo);
+          let photo = data.data.photos.photo.map(pic => {
             let src =
               "http://farm" +
               pic.farm +
@@ -87,10 +91,18 @@ class App extends React.Component {
           if (photo.length > 0) {
             location["photos"] = photo;
           } else {
+            // if image not found showing "No Image Found"
             location["photos"] = [
               "https://artelectronics.ru/default_images/main_image/base/missing.jpg"
             ];
           }
+        })
+        .catch(err => {
+          console.log(err);
+          this.setState({
+            info: "Sorry data can't be loaded",
+            error: true
+          });
         });
       return location;
     });
@@ -102,10 +114,10 @@ class App extends React.Component {
       client_id: process.env.REACT_APP_CLIENT_ID,
       client_secret: process.env.REACT_APP_CLIENT_SECRET,
       v: "20181203",
-      ll: "7.8968216,98.2998142",
-      query: "hotel",
-      radius: 1000,
-      limit: 20
+      ll: this.state.locationCenter.lat + "," + this.state.locationCenter.lng,
+      query: "museum",
+      radius: 2000,
+      limit: 10
     };
     axios
       .get(endPoint + new URLSearchParams(params))
@@ -149,14 +161,17 @@ class App extends React.Component {
             toggleSidebar={this.toggleSidebar}
             isHidden={this.state.isHidden}
           />
-          <div className="map-container">
+          <div className="map-container" aria-label="map-container">
             <MapContainer
+              locationCenter={this.state.locationCenter}
               locations={locations}
               activeMarker={this.state.activeMarker}
               showingInfoWindow={this.state.showingInfoWindow}
               selectedPlace={this.state.selectedPlace}
               onMarkerClick={this.onMarkerClick}
               onMapClicked={this.onMapClicked}
+              info={this.state.info}
+              error={this.state.error}
             />
           </div>
         </main>

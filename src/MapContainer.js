@@ -9,8 +9,8 @@ class MapContainer extends React.Component {
         google={this.props.google}
         onClick={this.onMapClicked}
         style={style}
-        initialCenter={{ lat: 7.8968216, lng: 98.2998142 }}
-        zoom={15}
+        initialCenter={this.props.locationCenter}
+        zoom={13}
       >
         {this.props.locations.map(place => {
           return (
@@ -20,8 +20,6 @@ class MapContainer extends React.Component {
               title={place.name}
               name={place.name}
               photos={place.photos}
-              likes={place.likes}
-              price={place.price}
               position={place.location}
               tabIndex="0"
             />
@@ -31,19 +29,27 @@ class MapContainer extends React.Component {
           marker={this.props.activeMarker}
           visible={this.props.showingInfoWindow}
         >
-          <div className="place-info" aria-label="placeinfo">
-            <h2 tabIndex="0">{this.props.selectedPlace.name}</h2>
-            {this.props.selectedPlace.photos
-              ? this.props.selectedPlace.photos.map(photo => (
-                  <img
-                    key={photo}
-                    className="place-img"
-                    src={photo}
-                    alt={this.props.selectedPlace.name}
-                  />
-                ))
-              : null}
-          </div>
+          {this.props.error ? (
+            <div className="place-info" aria-label="placeinfo">
+              <span className="error" aria-label="error">
+                {this.props.info}
+              </span>
+            </div>
+          ) : (
+            <div className="place-info" aria-label="placeinfo">
+              <h2 tabIndex="0">{this.props.selectedPlace.name}</h2>
+              {this.props.selectedPlace.photos
+                ? this.props.selectedPlace.photos.map(photo => (
+                    <img
+                      key={photo}
+                      className="place-img"
+                      src={photo}
+                      alt={this.props.selectedPlace.name}
+                    />
+                  ))
+                : null}
+            </div>
+          )}
         </InfoWindow>
       </Map>
     );

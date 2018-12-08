@@ -1,6 +1,6 @@
 # Neighborhood Map (React)
 
-It is a single page app uses React Google maps, foursquare API and flickr API to list some hotels in Phuket, Thailand. This project was built for Udacity's front-end web developer Nanodegree.
+It is a single page app uses React Google maps, foursquare API and flickr API to list some museums in NY. This project was built for Udacity's front-end web developer Nanodegree.
 
 PROJECT SPECIFICATION:
 [Neighborhood Map project rubric](https://review.udacity.com/#!/rubrics/1351/view).

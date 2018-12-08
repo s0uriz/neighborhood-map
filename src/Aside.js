@@ -21,7 +21,7 @@ class Aside extends React.Component {
             {this.props.locations.map(location => {
               return (
                 <li
-                  role="button"
+                  arial-label={location.name}
                   tabIndex="0"
                   onClick={() => this.props.onListItemClick(location.name)}
                   onKeyPressCapture={() =>

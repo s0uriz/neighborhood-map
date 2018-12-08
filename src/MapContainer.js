@@ -4,6 +4,7 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 class MapContainer extends React.Component {
   render() {
     const style = { width: "100%", height: "100%" };
+
     return (
       <Map
         google={this.props.google}
@@ -29,6 +30,7 @@ class MapContainer extends React.Component {
         <InfoWindow
           marker={this.props.activeMarker}
           visible={this.props.showingInfoWindow}
+          onOpen={this.props.animateMarker}
           onClose={this.props.onMapClicked}
           tabIndex="0"
         >

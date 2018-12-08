@@ -44,6 +44,13 @@ class App extends React.Component {
       });
     }
   };
+  animateMarker = () => {
+    let marker = this.state.activeMarker;
+    marker.setAnimation(window.google.maps.Animation.BOUNCE);
+    setTimeout(function() {
+      marker.setAnimation(null);
+    }, 550);
+  };
 
   handleLocationSearch = event => {
     this.setState({
@@ -189,6 +196,7 @@ class App extends React.Component {
               onMapClicked={this.onMapClicked}
               info={this.state.info}
               error={this.state.error}
+              animateMarker={this.animateMarker}
             />
           </div>
         </main>

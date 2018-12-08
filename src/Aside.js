@@ -22,6 +22,7 @@ class Aside extends React.Component {
               return (
                 <li
                   arial-label={location.name}
+                  role="button"
                   tabIndex="0"
                   onClick={() => this.props.onListItemClick(location.name)}
                   onKeyPressCapture={() =>

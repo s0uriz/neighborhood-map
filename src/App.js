@@ -5,6 +5,13 @@ import MapContainer from "./MapContainer";
 import axios from "axios";
 require("dotenv").config();
 
+//Display message if the map does not load
+window.gm_authFailure = () => {
+  let error = document.getElementById("error-message");
+  error.innerHTML = "We cant access Google Maps API for now!";
+  error.classList.remove("hidden");
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -116,8 +123,8 @@ class App extends React.Component {
       v: "20181203",
       ll: this.state.locationCenter.lat + "," + this.state.locationCenter.lng,
       query: "museum",
-      radius: 2000,
-      limit: 10
+      radius: 3000,
+      limit: 20
     };
     axios
       .get(endPoint + new URLSearchParams(params))
@@ -134,7 +141,14 @@ class App extends React.Component {
           locations: location
         });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err.response);
+        if (err) {
+          let error = document.getElementById("error-message");
+          error.innerHTML = "Sorry data can't be loaded";
+          error.classList.remove("hidden");
+        }
+      });
   };
 
   render() {
@@ -162,6 +176,9 @@ class App extends React.Component {
             isHidden={this.state.isHidden}
           />
           <div className="map-container" aria-label="map-container">
+            <div id="error-message" className="error-message hidden">
+              eror text
+            </div>
             <MapContainer
               locationCenter={this.state.locationCenter}
               locations={locations}

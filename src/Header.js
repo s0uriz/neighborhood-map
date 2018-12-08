@@ -9,6 +9,7 @@ class Header extends React.Component {
             this.props.isHidden ? "hamburger-icon " : "hamburger-icon active"
           }
           role="button"
+          tabIndex="1"
           aria-label="button"
           onClick={this.props.toggleSidebar}
           onKeyPressCapture={this.props.toggleSidebar}

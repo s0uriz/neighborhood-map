@@ -115,6 +115,7 @@ header {
 
 .hamburger-menu {
   cursor: pointer;
+  outline: none;
 }
 .hamburger-menu div {
   width: 20px;
@@ -161,4 +162,13 @@ header {
 }
 .hidden {
   display: none;
+}
+.error-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: #fff;
+  padding: 20px;
+  width: 100%;
 }

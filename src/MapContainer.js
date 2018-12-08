@@ -22,6 +22,7 @@ class MapContainer extends React.Component {
               photos={place.photos}
               position={place.location}
               tabIndex="0"
+              animation={this.props.google.maps.Animation.DROP}
             />
           );
         })}
@@ -29,6 +30,7 @@ class MapContainer extends React.Component {
           marker={this.props.activeMarker}
           visible={this.props.showingInfoWindow}
           onClose={this.props.onMapClicked}
+          tabIndex="0"
         >
           {this.props.error ? (
             <div className="place-info" aria-label="placeinfo">

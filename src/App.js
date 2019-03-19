@@ -81,11 +81,9 @@ class App extends React.Component {
       let tag = location.name;
       axios
         .get(
-          "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" +
-            process.env.REACT_APP_FLICKR_KEY +
-            "&tags=" +
-            tag +
-            "&per_page=2&page=1&format=json&nojsoncallback=1"
+          `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${
+            process.env.REACT_APP_FLICKR_KEY
+          }&tags=${tag}&per_page=2&page=1&format=json&nojsoncallback=1`
         )
         .then(data => {
           //console.log(data.data.photos.photo);
